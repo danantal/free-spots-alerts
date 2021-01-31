@@ -1,11 +1,14 @@
 
+const username = Cypress.env("username")
+const password = Cypress.env("password")
+
 describe("vaccinare", () => {
     it("login", () => {
         cy.intercept("https://programare.vaccinare-covid.gov.ro/scheduling/api/centres").as("centersRequest")
 
         cy.visit("https://programare.vaccinare-covid.gov.ro/");
-        cy.get('#mat-input-0').type("antalm@hotmail.com");
-        cy.get('#mat-input-1').type("Ma8!martasch");
+        cy.get('#mat-input-0').type(username);
+        cy.get('#mat-input-1').type(password);
         cy.get('.submit-button').click({ force: true });
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/recipients");
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/planning/recipient/2331311");
