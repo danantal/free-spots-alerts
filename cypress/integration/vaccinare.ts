@@ -13,7 +13,7 @@ describe("vaccinare", () => {
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/recipients");
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/planning/recipient/2331311");
 
-        cy.wait("@centersRequest").then((r) => {
+        cy.wait("@centersRequest", {timeout: 15000}).then((r) => {
             const center = r.response?.body.content.find((c: {availableSlots: number}) => c.availableSlots > 0);
             if (center) {
                 cy.task("log", "center found", center);
