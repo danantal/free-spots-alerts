@@ -33,4 +33,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run the test
-        run: yarn cypress run
+        run: yarn cypress run --env username={{secrets.VACCINARE_USERNAME}},password={{secrets.VACCINARE_PASSWORD}}
