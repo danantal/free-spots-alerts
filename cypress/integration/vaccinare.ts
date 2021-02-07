@@ -24,10 +24,15 @@ describe("vaccinare", () => {
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/planning/recipient/2331311");
 
         cy.wait("@centersRequest", {timeout: 15000}).then((r) => {
-            const center: Center = r.response?.body.content.find((c: Center) => c.availableSlots > 0);
-            if (center) {
-                cy.task("log", `There are ${center.availableSlots} available slots at ${center.name}, ${center.localityName}`);
-                cy.task("sendSms", {to: "+40728901566", text: `There are ${center.availableSlots} available slots at ${center.name}, ${center.localityName}`})
+            const centers: Center[] = r.response?.body.content.filter((c: Center) => c.availableSlots > 0);
+            if (centers.length > 0) {
+                let message = `There are available slots at:`;
+                centers.forEach(c => {
+                    message += `\n${c.name}, ${c.localityName} - ${c.availableSlots} slots`;
+                });
+
+                cy.task("log", message);
+                cy.task("sendSms", {to: "+40728901566", text: message})
             } else {
                 cy.task("log", "There are no centers with available slots.");
             }
