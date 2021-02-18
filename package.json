@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "cypress": "^6.4.0",
+    "cypress-wait-until": "^1.7.1",
     "twilio": "^3.55.1",
     "typescript": "^4.1.3"
   }

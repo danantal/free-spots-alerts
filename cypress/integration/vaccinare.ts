@@ -1,3 +1,4 @@
+import { isExternalModuleNameRelative } from "typescript"
 
 const username = Cypress.env("username")
 const password = Cypress.env("password")
@@ -20,8 +21,7 @@ describe("vaccinare", () => {
 
         cy.url({timeout: 15000}).should("eq", "https://programare.vaccinare-covid.gov.ro/#/home");
 
-        cy.visit("https://programare.vaccinare-covid.gov.ro/#/recipients");
-        cy.visit("https://programare.vaccinare-covid.gov.ro/#/planning/recipient/2331311");
+        cy.visit("https://programare.vaccinare-covid.gov.ro/#/appointment/new/2331311");
 
         cy.wait("@centersRequest", {timeout: 15000}).then((r) => {
             const centers: Center[] = r.response?.body.content.filter((c: Center) => c.availableSlots > 0);
