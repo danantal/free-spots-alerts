@@ -24,7 +24,7 @@ describe("vaccinare", () => {
         cy.visit("https://programare.vaccinare-covid.gov.ro/#/appointment/new/2331311");
 
         cy.wait("@centersRequest", {timeout: 15000}).then((r) => {
-            const centers: Center[] = r.response?.body.content.filter((c: Center) => c.availableSlots > 0);
+            const centers: Center[] = r.response?.body.content.filter((c: Center) => c.availableSlots > 0 && c.localityName === "Cluj-Napoca");
             if (centers.length > 0) {
                 let message = `There are available slots at:`;
                 centers.forEach(c => {
