@@ -21,7 +21,7 @@ describe("vaccinare", () => {
 
         cy.url({timeout: 15000}).should("eq", "https://programare.vaccinare-covid.gov.ro/#/home");
 
-        cy.visit("https://programare.vaccinare-covid.gov.ro/#/appointment/new/2331311");
+        cy.visit("https://programare.vaccinare-covid.gov.ro/#/appointment/new/6090864");
 
         cy.wait("@centersRequest", {timeout: 15000}).then((r) => {
             const centers: Center[] = r.response?.body.content.filter((c: Center) => c.availableSlots > 0 && c.localityName === "Cluj-Napoca");
