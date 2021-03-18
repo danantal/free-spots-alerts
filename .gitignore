@@ -105,3 +105,4 @@ dist
 
 cypress/screenshots
 cypress/videos
+cypress.env.json
