@@ -10,10 +10,13 @@ type Center = {
 }
 
 describe("vaccinare", () => {
-    it("login", () => {
+    before(() => {
         cy.intercept("https://programare.vaccinare-covid.gov.ro/scheduling/api/centres").as("centersRequest")
+    })
 
+    it("login", () => {
         cy.visit("https://programare.vaccinare-covid.gov.ro/");
+
         cy.get('#mat-input-0').type(username);
         cy.get('#mat-input-1').type(password);
         cy.get('.submit-button').click({ force: true });
